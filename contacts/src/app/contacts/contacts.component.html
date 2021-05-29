@@ -1,0 +1,52 @@
+<div class="layout-box">
+  <app-header></app-header>
+  <div class="page-content">
+    <div class="main-section">
+      <div class="main-container">
+        <div class="sidebar">
+          <div class="bottom-container">
+            <button class="button is-primary is-small" [disabled]="newContact" (click)="addContact()"> + Create
+              contact</button>
+            <p class="all-contacts">All Contacts ({{contacts.length}})</p>
+          </div>
+          <div class="contacts-list" style="padding-left:25px">
+            <input class="input" type="text" name="search" [(ngModel)]="searchContacts" autocomplete="off"
+              placeholder="Search contacts..." style="width:90%;">
+          </div>
+          <div class="contacts-list custom-scrollbar" [@listAnim] data-simplebar data-simplebar-auto-hide="false">
+            <div [@itemAnim] class="contact-item has-loading-indicator"
+              *ngFor="let contact of contacts | filter : searchContacts"
+              [ngClass]="{ 'selected': contact===selectedContact, 'is-loading is-small is-primary': contact===contactBeingLoaded }"
+              (click)="setSelectedContact(contact)">
+              <p>{{ contact.name || 'Adding a new contact...' }}</p>
+              <p>{{ contact.phoneNumber}}</p>
+            </div>
+          </div>
+          <div class="bottom-container" *ngIf="showCategoryForm">
+            <input #categoryTitleInput class="input has-background-light is-small" type="text"
+              placeholder="Enter category name...">
+            <button class="button is-small" (click)="createCategory(categoryTitleInput.value)">Cancel</button>
+            <button class="button is-primary has-text-white is-small"
+              (click)="createCategory(categoryTitleInput.value)">Create</button>
+          </div>
+        </div>
+        <div class="form-container">
+          <div class="has-loading-indicator"
+            [ngClass]="{ 'is-loading': contactBeingLoaded===selectedContact && selectedContact }">
+
+            <app-contact-form *ngIf="selectedContact" [contact]="selectedContact" (formSubmit)="onFormSubmit($event)"
+              (formCancel)="onFormCancel()" (contactDelete)="removeContact()" style="width: 100%; margin:auto;">
+            </app-contact-form>
+
+            <div class="empty-state" *ngIf="!selectedContact">
+              <h3>Please select a contact</h3>
+              <img src="../../../assets/undraw_not_found_60pq.svg" alt="Not found illustration">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

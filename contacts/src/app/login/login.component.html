@@ -1,0 +1,44 @@
+<div class="main-section">
+
+  <div class="main-container">
+
+    <div class="form-container-main">
+      <h1 class="title">Log in</h1>
+
+
+      <form #loginForm="ngForm" (ngSubmit)="onFormSubmit(loginForm)">
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input type="email" class="input" name="email" required email [ngModel]="user.email"
+              placeholder="e.g. srinivasnagaram@gmail.com">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" class="input" name="password" [ngModel]="user.password" autocomplete required
+              minlength="8" placeholder="e.g. password123">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button type="submit" style="margin-top: 20px;" class="button is-primary has-text-white is-fullwidth"
+              [disabled]="!loginForm.valid" placeholder="e.g. password123">Log in</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="alternate-bar">
+      <p>Don't have an account? <a href="#" class="link" routerLink="/signup">Sign up</a></p>
+    </div>
+
+  </div>
+
+</div>

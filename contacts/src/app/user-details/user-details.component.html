@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="main-container">
+  <div class="form-container">
+    <div class="user-details-title-container">
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">
+            User Details
+          </h1>
+          <app-user-details-form [user]="user" (formSubmit)="saveUserDetails($event)"></app-user-details-form>
+        </div>
+        <div class="column">
+          <button class="button logout-button is-danger is-pulled-right" (click)="logout()">Log out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
